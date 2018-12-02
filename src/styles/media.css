@@ -1,0 +1,12 @@
+/* Media queries for common device breakpoints */
+@media (min-width: 481px) and (max-width: 767px) {
+  .search-container {
+    width: 60%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .search-container {
+    width: 80%;
+  }
+}
