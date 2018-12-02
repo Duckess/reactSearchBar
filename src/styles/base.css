@@ -11,6 +11,15 @@
   color: #888888;
 }
 
+button {
+  border-color: transparent;
+  border-width: 0;
+}
+
+button:focus {
+  outline: none;
+}
+
 .display-flex {
   display: flex;
 }

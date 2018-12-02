@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class IconComponent extends Component {
   getIconClassName() {
-    return `fas fa-${this.props.iconName} ${this.props.iconColor}`;
+    return `fas fa-${this.props.iconName} ${this.props.iconColor} ${this.props.className || ''}`;
   }
 
   render() {
