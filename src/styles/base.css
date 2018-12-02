@@ -11,6 +11,22 @@
   color: #888888;
 }
 
+.p-8 {
+  padding: 8px;
+}
+
+.border-gray {
+  border: 1px solid #dddddd;
+}
+
+.border-top-none {
+  border-top: none;
+}
+
+.border-bottom-none {
+  border-bottom: none;
+}
+
 button {
   border-color: transparent;
   border-width: 0;

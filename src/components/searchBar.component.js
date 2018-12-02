@@ -14,27 +14,34 @@ class SearchBarComponent extends Component {
     };
   }
 
+  /* Updating the state of the component accordingly */
   checkInputValue($event) {
     if ($event.target.value) {
       this.setState({
         showClearButton: true,
         searchValue: $event.target.value
-      })
+      });
+
+      throttled(300, this.props.getSearchResults($event.target.value));
     } else {
       this.setState({
         showClearButton: false,
         searchValue: $event.target.value
-      })
+      });
     }
   }
 
+  /* Resetting component state */
   clearSearchValue() {
+    throttled(300, this.props.getSearchResults(''));
+
     this.setState({
       showClearButton: false,
       searchValue: ''
-    })
+    });
   }
 
+  /* Displaying the clear button based on the state */
   renderClearButton() {
     if (this.state.showClearButton) {
       return (
@@ -47,23 +54,38 @@ class SearchBarComponent extends Component {
 
   render() {
     return (
-      <div className="search-container display-flex align-center content-between">
+      <div className="search-bar-container">
         <input
           type="text"
           role="search"
-          className="input"
+          className="border-gray search-bar input p-8"
           value={this.state.searchValue}
           onFocus={this.checkInputValue}
           onChange={this.checkInputValue}
           placeholder="Zoeken"
         />
 
-        {this.renderClearButton()}
+        <div className="search-bar-buttons-container">
+          {this.renderClearButton()}
 
-        <IconComponent iconName="search" iconColor="gray"></IconComponent>
+          <IconComponent iconName="search" iconColor="gray"></IconComponent>
+        </div>
       </div>
     );
   }
 }
+
+/* Helper function that limits the api calls */
+function throttled(delay, fn) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = (new Date()).getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  }
+};
 
 export default SearchBarComponent;
